@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  height:95%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-image: url('../assets/images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+mat-item > a{
+  width: 100%;
+}
+.sidenav {
+  padding: 20px;
+}

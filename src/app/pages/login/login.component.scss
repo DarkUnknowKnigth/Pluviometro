@@ -1,0 +1,40 @@
+mat-form-field{
+  width: 90%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+mat-card-content{
+  margin: auto;
+}
+mat-card{
+  margin: auto;
+  max-width: 80%;
+}
+.logo{
+  width: 100%;
+  height: 180px;
+}
+.logo-last{
+  margin-top: 10px;
+  float: right;
+  width: 90px;
+  height: 70px;
+}
+mat-card-actions{
+  align-content: flex-end;
+  justify-content: flex-end;
+}
+// en grnade
+@media screen and ( min-width: 700px ){
+  .logo{
+    width: 100%;
+    height: 380px;
+  }
+  .logo-last{
+    position: absolute;
+    top: 90%;
+    right: 10%;
+    width: 90px;
+    height: 70px;
+  }
+}

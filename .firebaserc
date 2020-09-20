@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "floods-b81b8"
+  },
+  "targets": {
+    "floods-b81b8": {
+      "hosting": {
+        "floods": [
+          "floods-b81b8"
+        ]
+      }
+    }
+  }
+}
