@@ -10,10 +10,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'maps', component: MapsComponent,  canActivate: [ AngularFireAuthGuard ] },
   { path: 'pluviometer', component: PluviometerComponent,  canActivate: [ AngularFireAuthGuard ] },
-  { path: 'measurements', component: MeasurementsComponent,  canActivate: [ AngularFireAuthGuard ] },
+  { path: 'measurements/:name', component: MeasurementsComponent,  canActivate: [ AngularFireAuthGuard ] },
   { path: '**',  pathMatch: 'full', redirectTo: 'login'},
 ];
-
+// agregar a rutas que quiero proteger canActivate: [ AngularFireAuthGuard ]
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]

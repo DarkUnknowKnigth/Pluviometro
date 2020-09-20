@@ -1,1 +1,36 @@
-<p>measurements works!</p>
+<mat-card *ngIf="!show">
+  <mat-card-header>
+    <mat-card-title>Registrar Mediciones</mat-card-title>
+    <img matCardAvatar [src]="user.photoURL">
+    <mat-card-subtitle *ngIf="user">{{user.displayName}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="Fecha" name="hour" [formControl]="hour">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" name="nm" placeholder="NM" [formControl]="nm">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="addMeasurement()">Agrear Medicion</button>
+    <button mat-button (click)="show = true">Ver Mediciones</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="show">
+    <mat-card-header>
+        <mat-card-title>Mis mediciones</mat-card-title>
+        <mat-card-subtitle>{{user.displayName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h1 *ngIf="locationData">Pluviometro: {{locationData.name}}</h1>
+      <mat-list *ngIf="locationData.measurements">
+        <mat-list-item *ngFor="let measurement of locationData.measurements">
+          Fecha: {{measurement.hour}} - NM: {{measurement.nm}}
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions align="start">
+        <button mat-button (click)="show=false">cerrar</button>
+    </mat-card-actions>
+</mat-card>

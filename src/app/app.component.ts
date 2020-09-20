@@ -9,5 +9,8 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'Precipitaciones';
   showFiller = false;
-  constructor(public auth: AuthService){}
+  isAuth = false;
+  constructor(public auth: AuthService){
+    this.auth.authUser.subscribe(user => this.isAuth = user.uid ? true : false);
+  }
 }

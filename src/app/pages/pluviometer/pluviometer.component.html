@@ -1,1 +1,47 @@
-<p>pluviometer works!</p>
+<mat-card *ngIf="!show">
+    <mat-card-header>
+        <mat-card-title>Registrar Pluviometro</mat-card-title>
+        <img matCardAvatar [src]="user.photoURL">
+        <mat-card-subtitle *ngIf="user">{{user.displayName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Nombre" [formControl]="name" (keyup)="name.setValue(n.value)" #n required minlength="1">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Latitud" disabled [value]="latitude">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Location" disabled [value]="longitude">
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-button (click)="regist()">Registrar nuevo</button>
+      <button mat-button (click)="show = true; getLocation();" color="secondary">Ver Registros</button>
+    </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="show">
+    <mat-card-header>
+      <mat-card-title>Mis Pluviometros</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+       <mat-list dense>
+           <mat-list-item *ngFor="let location of locationsArray">
+              <label [ngStyle]="{ 'color': (longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude ) ? 'green' : ' white' }">
+                {{location.name}} ({{location.latitude}} , {{location.longitude}})
+              </label>
+              <span *ngIf="longitude === location.longitude && latitude === location.latitude" style="color: white;margin-left: 10px;">Exact</span>
+              <span *ngIf="longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude" style="margin-left:10px;">Near</span>
+              <a mat-button [routerLink]="['/measurements',location.name]" style="float: right;"><mat-icon class="mat-18">add</mat-icon></a>
+            </mat-list-item>
+       </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <mat-chip-list>
+          <mat-chip>Tu Latitud: {{latitude}}</mat-chip>
+          <mat-chip> Tu Longitud : {{longitude}}</mat-chip>
+      </mat-chip-list>
+      <button mat-button (click)="show= false" color="danger">Cerrar</button>
+    </mat-card-actions>
+</mat-card>
+

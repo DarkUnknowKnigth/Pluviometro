@@ -15,6 +15,7 @@ import { MapsComponent } from './pages/maps/maps.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MeasurementsComponent } from './pages/measurements/measurements.component';
 import { PluviometerComponent } from './pages/pluviometer/pluviometer.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { PluviometerComponent } from './pages/pluviometer/pluviometer.component'
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    ReactiveFormsModule,
     LeafletModule
   ],
   providers: [],
