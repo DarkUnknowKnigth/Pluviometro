@@ -33,6 +33,7 @@
               <span *ngIf="longitude === location.longitude && latitude === location.latitude" style="color: white;margin-left: 10px;">Exact</span>
               <span *ngIf="longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude" style="margin-left:10px;">Near</span>
               <a mat-button [routerLink]="['/measurements',location.name]" style="float: right;"><mat-icon class="mat-18">add</mat-icon></a>
+              <button mat-button (click)="deleteLocation(location.name)" style="float: right;"><mat-icon class="mat-18">close</mat-icon></button>
             </mat-list-item>
        </mat-list>
     </mat-card-content>
@@ -42,6 +43,7 @@
           <mat-chip> Tu Longitud : {{longitude}}</mat-chip>
       </mat-chip-list>
       <button mat-button (click)="show= false" color="danger">Cerrar</button>
+      <button mat-button (click)="export()" color="danger">Exportar</button>
     </mat-card-actions>
 </mat-card>
 

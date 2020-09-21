@@ -1,1 +1,2 @@
-<div class="map" id="mapid" leaflet [leafletOptions]="options"></div>
+Mapa de Pluviometros
+<div *ngIf="options" class="map" id="mapid" leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl"></div>

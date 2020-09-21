@@ -50,6 +50,14 @@ export class MeasurementsComponent implements OnInit {
       });
     }
   }
+  deleteMeasure( hour ): void {
+    const ref = 'locations/' + this.name;
+    const itemRef = this.db.object(ref);
+    const measurementsRem = this.locationData.measurements.filter( m => hour !== m.hour );
+    itemRef.update({
+      measurements:   measurementsRem
+    });
+  }
   getHour(): any {
     const now = new Date();
     this.hour.setValue(now.toLocaleString());

@@ -9,7 +9,7 @@
       <input matInput placeholder="Fecha" name="hour" [formControl]="hour">
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="number" name="nm" placeholder="NM" [formControl]="nm">
+      <input matInput type="number" name="nm" placeholder="Precipitacion Acumulada" [formControl]="nm">
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions>
@@ -27,6 +27,7 @@
       <mat-list *ngIf="locationData.measurements">
         <mat-list-item *ngFor="let measurement of locationData.measurements">
           Fecha: {{measurement.hour}} - NM: {{measurement.nm}}
+          <button mat-button (click)="deleteMeasure(measurement.hour)" style="float: right;"><mat-icon class="mat-18">close</mat-icon></button>
         </mat-list-item>
       </mat-list>
     </mat-card-content>
