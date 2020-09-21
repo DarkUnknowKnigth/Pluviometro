@@ -24,8 +24,9 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  logout(){
+  logout(): void{
     this.auth.logout();
+    this.auth.setAuthUser(null);
     this.router.navigateByUrl('/login');
   }
 }

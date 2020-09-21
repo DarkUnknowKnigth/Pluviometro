@@ -1,9 +1,10 @@
 {
-  "name": "floods",
-  "short_name": "floods",
+  "name": "RainFall",
+  "short_name": "RainFall",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
+  "orientation": "portrait",
   "scope": "./",
   "start_url": "./",
   "icons": [

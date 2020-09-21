@@ -11,7 +11,7 @@ export class AuthService {
   public authUser = this.userSource.asObservable();
   constructor(private afauth: AngularFireAuth) {
     this.afauth.authState.subscribe( user => {
-      if(!user){
+      if ( !user ) {
         return;
       }
       this.setAuthUser(user);
