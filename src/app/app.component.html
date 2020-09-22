@@ -1,11 +1,11 @@
 
-  <mat-toolbar>
-    <button mat-icon-button class="icon" aria-label="icon-button with menu icon" (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>{{title}}</span>
-    <span class="spacer"></span>
-  </mat-toolbar>
+<mat-toolbar>
+  <button mat-icon-button class="icon" aria-label="icon-button with menu icon" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{title}}</span>
+  <span class="spacer"></span>
+</mat-toolbar>
 <div class="root">
   <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side">
@@ -14,7 +14,7 @@
             <a mat-button [routerLink]="['/login']">Login</a>
           </mat-list-item>
           <mat-list-item *ngIf="isAuth">
-            <a mat-button [routerLink]="['/maps']">Mapas</a>
+            <a mat-button [routerLink]="['/maps']">Mapa</a>
           </mat-list-item>
           <mat-list-item *ngIf="isAuth">
             <a mat-button [routerLink]="['/pluviometer']">Pluviometros</a>

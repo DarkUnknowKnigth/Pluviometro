@@ -1,6 +1,12 @@
 .container {
   width: 100%;
-  height: 93vh;
+  height: 90vh;
+  overflow-y: scroll;
+}
+mat-toolbar{
+  background-color: transparent;
+  position: relative;
+  top: 0;
 }
 @media only screen and (min-width: 700px){
   .container {
@@ -12,10 +18,14 @@
     position: absolute;
     bottom: 0;
   }
+  .sidenav {
+    padding: 20px;
+    height: 100%;
+  }
 }
 .sidenav-content {
   display: flex;
-  height: 100%;
+  height: 90vh;
   z-index: 1;
   align-items: center;
   justify-content: center;
@@ -25,9 +35,10 @@ mat-item > a{
 }
 .sidenav {
   padding: 20px;
+  max-height: 100vh;
 }
 .copyright{
   text-align: center;
   position: absolute;
-  bottom: 50px;
+  bottom: 10vh;
 }

@@ -10,10 +10,12 @@ mat-card-content{
 mat-card{
   margin: auto;
   max-width: 90%;
+  max-height: 85vh;
 }
 .logo{
-  width: 350px;
-  height: 350px;
+  margin: auto;
+  width: 150px;
+  height: 150px;
 }
 .logo-last{
   margin-top: 10px;
@@ -23,6 +25,7 @@ mat-card{
 }
 .image-container{
   margin: auto;
+  text-align: center;
   width: 100%;
 }
 mat-card-actions{
