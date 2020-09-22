@@ -24,12 +24,22 @@
     </mat-card-header>
     <mat-card-content>
       <h1 *ngIf="locationData">Pluviometro: {{locationData.name}}</h1>
-      <mat-list *ngIf="locationData.measurements">
-        <mat-list-item *ngFor="let measurement of locationData.measurements">
-          Fecha: {{measurement.hour}} - NM: {{measurement.nm}}
-          <button mat-button (click)="deleteMeasure(measurement.hour)" style="float: right;"><mat-icon class="mat-18">close</mat-icon></button>
-        </mat-list-item>
-      </mat-list>
+      <table  *ngIf="locationData.measurements">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>PP</th>
+            <th>Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let measurement of locationData.measurements">
+            <td>{{measurement.hour}}</td>
+            <td>{{measurement.nm}}</td>
+            <td> <button mat-button (click)="deleteMeasure(measurement.hour)" style="float: right;"><mat-icon class="mat-18">close</mat-icon></button></td>
+          </tr>
+        </tbody>
+      </table>
     </mat-card-content>
     <mat-card-actions align="start">
         <button mat-button (click)="show=false">cerrar</button>

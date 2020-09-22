@@ -7,10 +7,11 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Precipitaciones';
+  title = 'Pluvify - Cloud';
   showFiller = false;
   isAuth = false;
   constructor(public auth: AuthService){
     this.auth.authUser.subscribe(user => this.isAuth = user.uid ? true : false);
+    this.auth.isAuth.subscribe( a => this.isAuth = a);
   }
 }

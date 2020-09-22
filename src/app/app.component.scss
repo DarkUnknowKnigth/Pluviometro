@@ -22,12 +22,19 @@ mat-toolbar{
     padding: 20px;
     height: 100%;
   }
+  .sidenav-content{
+    height: 95vh;
+  }
 }
 .sidenav-content {
   display: flex;
-  height: 90vh;
+  position: relative;
+  top: 0;
+  height: 95vh;
   z-index: 1;
   align-items: center;
+  background-image: url( '../assets/images/bg.jpg');
+  background-size: 100vw 100vh;
   justify-content: center;
 }
 mat-item > a{
@@ -36,6 +43,7 @@ mat-item > a{
 .sidenav {
   padding: 20px;
   max-height: 100vh;
+  background-image: url( '../assets/images/svbg.jpg');
 }
 .copyright{
   text-align: center;

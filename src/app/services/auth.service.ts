@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,7 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private userSource = new BehaviorSubject<any>( {} );
   public authUser = this.userSource.asObservable();
-  constructor(private afauth: AngularFireAuth) {
+  private isAuthSource = new BehaviorSubject<boolean>( false );
+  public isAuth = this.isAuthSource.asObservable();
+  constructor(private afauth: AngularFireAuth,private router: Router) {
     this.afauth.authState.subscribe( user => {
       if ( !user ) {
         return;
@@ -22,10 +25,15 @@ export class AuthService {
   setAuthUser(user: any): void {
      this.userSource.next(user);
   }
+  setAuthUserStatus(status: boolean): void {
+     this.userSource.next(status);
+  }
   login(): void {
-    this.afauth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.afauth.signInWithPopup(new auth.GoogleAuthProvider()).then( r => this.setAuthUserStatus(true) );
   }
   logout(): void {
     this.afauth.signOut();
+    this.setAuthUserStatus(false);
+    this.router.navigateByUrl('login');
   }
 }
