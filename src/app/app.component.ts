@@ -7,7 +7,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Pluvify - Cloud';
+  title = 'Pluvify Cloud';
   showFiller = false;
   isAuth = false;
   constructor(public auth: AuthService){
