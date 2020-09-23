@@ -40,6 +40,7 @@ export class AuthService {
     this.afauth.signInWithPopup(new auth.GoogleAuthProvider());
   }
   logout(): void {
+    localStorage.removeItem('_PLUVIFY_');
     this.afauth.signOut();
     this.setAuthUser(null);
     this.setAuthUserStatus(false);
