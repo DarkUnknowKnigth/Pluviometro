@@ -10,8 +10,7 @@ export class AppComponent {
   title = 'Pluvify Cloud';
   showFiller = false;
   isAuth = false;
-  constructor(public auth: AuthService){
-    this.auth.authUser.subscribe(user => this.isAuth = user.uid ? true : false);
+  constructor(public auth: AuthService) {
     this.auth.isAuth.subscribe( a => this.isAuth = a);
   }
 }

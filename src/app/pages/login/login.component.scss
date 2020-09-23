@@ -14,8 +14,11 @@ mat-card{
 }
 .logo{
   margin: auto;
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
+}
+mat-icon{
+  margin: 0 10px;
 }
 .logo-last{
   margin-top: 10px;
@@ -24,9 +27,9 @@ mat-card{
   height: 70px;
 }
 .image-container{
-  margin: auto;
+  margin: auto 0;
   text-align: center;
-  width: 100%;
+
 }
 mat-card-actions{
   align-content: flex-end;

@@ -8,25 +8,26 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  isAuth = false;
   constructor(private auth: AuthService, private router: Router) {
-  }
-
-  ngOnInit(): void {
-  }
-  login(){
-    this.auth.login();
+    this.auth.isAuth.subscribe( a => this.isAuth = a);
     this.auth.authUser.subscribe(user => {
-      if(!user){
+      if (!user)  {
         return;
       }else{
         this.router.navigateByUrl('/pluviometer');
       }
+    }, err => {
+      console.log(err);
     });
+  }
+  ngOnInit(): void {
+  }
+  async login(): Promise<any> {
+    this.auth.login();
   }
   logout(): void{
     this.auth.logout();
-    this.auth.setAuthUser(null);
     this.router.navigateByUrl('/login');
   }
 }

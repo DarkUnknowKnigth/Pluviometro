@@ -18,21 +18,30 @@ export class AuthService {
         return;
       }
       this.setAuthUser(user);
+      this.setAuthUserStatus(true);
     }, err => {
       console.log(err);
     });
   }
   setAuthUser(user: any): void {
-     this.userSource.next(user);
+    localStorage.setItem('_PLUVIFY_', JSON.stringify(user));
+    this.userSource.next(user);
   }
   setAuthUserStatus(status: boolean): void {
-     this.userSource.next(status);
+    this.isAuthSource.next(status);
   }
-  login(): void {
-    this.afauth.signInWithPopup(new auth.GoogleAuthProvider()).then( r => this.setAuthUserStatus(true) );
+  login(): any {
+    const u = JSON.parse(localStorage.getItem('_PLUVIFY_'));
+    if (u.uid){
+      this.setAuthUser(u);
+      this.setAuthUserStatus(true);
+      return;
+    }
+    this.afauth.signInWithPopup(new auth.GoogleAuthProvider());
   }
   logout(): void {
     this.afauth.signOut();
+    this.setAuthUser(null);
     this.setAuthUserStatus(false);
     this.router.navigateByUrl('login');
   }

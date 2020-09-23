@@ -13,8 +13,9 @@
     </div>
   </mat-card-content>
   <mat-card-actions style="text-align: right;">
-    <button mat-button (click)="login()"><mat-icon class="mat-18">login</mat-icon> Iniciar Sesión con Google</button>
-    <a mat-button href="https://github.com/DarkUnknowKnigth/Pluviometro"><mat-icon class="mat-18">add</mat-icon>Github</a>
+    <button *ngIf="!isAuth" mat-button (click)="login()">Iniciar Sesión con Google<mat-icon class="mat-18">login</mat-icon></button>
+    <a *ngIf="isAuth" mat-button [routerLink]="['/pluviometer']" routerLinkActive="router-link-active" >Pluviometros<mat-icon class="mat-18">add</mat-icon></a>
+    <a mat-button href="https://github.com/DarkUnknowKnigth/Pluviometro">Github<mat-icon class="mat-18">favorite</mat-icon></a>
   </mat-card-actions>
 </mat-card>
 
