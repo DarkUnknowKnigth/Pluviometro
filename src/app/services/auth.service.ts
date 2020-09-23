@@ -12,7 +12,7 @@ export class AuthService {
   public authUser = this.userSource.asObservable();
   private isAuthSource = new BehaviorSubject<boolean>( false );
   public isAuth = this.isAuthSource.asObservable();
-  constructor(private afauth: AngularFireAuth,private router: Router) {
+  constructor(private afauth: AngularFireAuth, private router: Router) {
     this.afauth.authState.subscribe( user => {
       if ( !user ) {
         return;
@@ -32,7 +32,7 @@ export class AuthService {
   }
   login(): any {
     const u = JSON.parse(localStorage.getItem('_PLUVIFY_'));
-    if (u.uid){
+    if (u.uid) {
       this.setAuthUser(u);
       this.setAuthUserStatus(true);
       return;

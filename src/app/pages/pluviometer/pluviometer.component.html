@@ -22,39 +22,70 @@
 </mat-card>
 <mat-card *ngIf="show">
     <mat-card-header>
-      <mat-card-title>Mis Pluviometros</mat-card-title>
+      <mat-card-title>Pluviometros</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <table>
-        <thead>
-          <tr>
-            <th>Lugar</th>
-            <th>Latitud</th>
-            <th>Longitud</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let location of locationsArray">
-            <td  [ngStyle]="{ 'color': (longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude ) ? 'green' : ' white' }">
-              {{location.name}}
-              <br>
-              <span *ngIf="longitude === location.longitude && latitude === location.latitude" style="color: white;margin-left: 10px;">(Aqui)</span>
-              <span *ngIf="longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude" style="margin-left:10px;">(Cerca)</span>
-            </td>
-            <td>
-              {{location.latitude}}
-            </td>
-            <td>
-              {{location.longitude}}
-            </td>
-            <td>
-              <a mat-button [routerLink]="['/measurements',location.name]" style="float: right;"><mat-icon class="mat-18">add</mat-icon></a>
-              <button mat-button (click)="deleteLocation(location.name)" style="float: right;"><mat-icon class="mat-18">close</mat-icon></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <mat-tab-group (selectedIndexChange)="index = m.selectedIndex" #m>
+        <mat-tab label="Mis Pluviometros">
+          <table>
+            <thead>
+              <tr>
+                <th>Lugar</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let location of locationsArray">
+                <td  [ngStyle]="{ 'color': (longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude ) ? 'green' : ' white' }">
+                  {{location.name}}
+                  <br>
+                  <span *ngIf="longitude === location.longitude && latitude === location.latitude" style="color: white;margin-left: 10px;">(Aqui)</span>
+                  <span *ngIf="longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude" style="margin-left:10px;">(Cerca)</span>
+                </td>
+                <td>
+                  {{location.latitude}}
+                </td>
+                <td>
+                  {{location.longitude}}
+                </td>
+                <td>
+                  <a mat-button [routerLink]="['/measurements',location.name]" style="float: right;"><mat-icon class="mat-18">add</mat-icon></a>
+                  <button mat-button (click)="deleteLocation(location.name)" style="float: right;"><mat-icon class="mat-18">close</mat-icon></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+        <mat-tab label="Todos los Pluviometros">
+          <table>
+            <thead>
+              <tr>
+                <th>Lugar</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let location of locationsArrayAll">
+                <td  [ngStyle]="{ 'color': (longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude ) ? 'green' : ' white' }">
+                  {{location.name}}
+                  <br>
+                  <span *ngIf="longitude === location.longitude && latitude === location.latitude" style="color: white;margin-left: 10px;">(Aqui)</span>
+                  <span *ngIf="longitude-10 <= location.longitude && longitude+10 >= location.longitude && latitude-10 <= location.latitude && latitude+10 >= location.latitude" style="margin-left:10px;">(Cerca)</span>
+                </td>
+                <td>
+                  {{location.latitude}}
+                </td>
+                <td>
+                  {{location.longitude}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+      </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>
       <mat-chip-list>
