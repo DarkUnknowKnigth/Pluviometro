@@ -32,7 +32,7 @@ export class AuthService {
   }
   login(): any {
     const u = JSON.parse(localStorage.getItem('_PLUVIFY_'));
-    if (u.uid) {
+    if (u) {
       this.setAuthUser(u);
       this.setAuthUserStatus(true);
       return;
