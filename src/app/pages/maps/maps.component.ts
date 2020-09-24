@@ -9,9 +9,11 @@ import { icon, latLng, marker, tileLayer } from 'leaflet';
 export class MapsComponent implements OnInit {
   latitude = 0;
   longitude = 0;
+  currentLocation = {};
   locations: any;
   locationsArray = [];
   markers = {};
+  showingInfo = false;
   options = {
     layers: [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -44,7 +46,7 @@ export class MapsComponent implements OnInit {
         overlays: this.markers
       };
       this.options = {
-        layers: [ this.streetMaps  ],
+        layers: [ this.streetMaps ].concat(Object.values(this.markers)),
         zoom: 7,
         center: latLng([ this.latitude, this.longitude ])
       };
@@ -58,16 +60,47 @@ export class MapsComponent implements OnInit {
   }
   generateMarkers(locations): void{
     locations.forEach(l => {
-      if(l.measurements){
+      if (l.measurements) {
         const last = l.measurements[l.measurements.length - 1];
-        this.markers[`${l.name} - ${last.hour} - (${last.nm})`] = marker([l.latitude, l.longitude], {
+        const measuresHTML =  l.measurements.map( m => {
+          return `<tr><td>${m.hour}</td><td>${m.nm}</td></tr>`;
+        }).join('');
+        const tmaker = marker([l.latitude, l.longitude], {
           icon: icon({
             iconSize: [25, 41],
             iconAnchor: [13, 41],
             iconUrl: 'leaflet/marker-icon.png',
             shadowUrl: 'leaflet/marker-shadow.png'
-          })
-        });
+          }),
+          title: `${l.name} - ${last.hour} - ${last.nm} pp`,
+          interactive: true,
+          alt: `${l.name} - ${last.hour} - ${last.nm} pp`
+        }).bindPopup(`
+          <div class="pop-up-map">
+            <b><h2>${l.name}</h2></b>
+            <p>
+              latitud: ${l.latitude}
+              <br>
+              longitud: ${l.longitude}
+              <br><br>
+              <b>Ultima mediciones</b>
+              <table><tr><th>Fecha</th><th>PP</th></tr>${measuresHTML}</table>
+            </p>
+            <span><small><b>${l.user}</b></small></span>
+          </div>
+          <style>
+          table{
+            text-align:center
+          }
+          th:nth-child(odd), td:nth-child(odd){
+              color:green;
+            }
+          th:nth-child(even), td:nth-child(even){
+              color:red;
+            }
+          </style>
+        `).openPopup();
+        this.markers[`${l.name}`] = tmaker;
       }
     });
   }
@@ -82,5 +115,4 @@ export class MapsComponent implements OnInit {
       this.longitude = 0;
     }
   }
-
 }

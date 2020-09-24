@@ -20,8 +20,8 @@ export class PluviometerComponent implements OnInit {
   user: any;
   longitude: number;
   show = false;
-  data = ['Locacion Hora Medida'];
-  all = ['Locacion Hora Medida'];
+  data = ['Locacion, Hora, Medida'];
+  all = ['Locacion, Hora, Medida'];
   constructor(private db: AngularFireDatabase, private auth: AuthService) {
     this.itemRef = this.db.object('locations');
     this.locations = this.itemRef.valueChanges();
@@ -34,14 +34,14 @@ export class PluviometerComponent implements OnInit {
         this.locationsArray.map( l => {
           if (l.measurements) {
             l.measurements.map( m => {
-              this.data.push(`${l.name} ${m.hour} ${m.nm}`);
+              this.data.push(`${l.name}, ${m.hour}, ${m.nm}`);
             });
           }
         });
         this.locationsArrayAll.map( l => {
           if (l.measurements) {
             l.measurements.map( m => {
-              this.all.push(`${l.name} ${m.hour} ${m.nm}`);
+              this.all.push(`${l.name}, ${m.hour}, ${m.nm}`);
             });
           }
         });
@@ -79,11 +79,11 @@ export class PluviometerComponent implements OnInit {
   export(): void {
     const element = document.createElement('a');
     if (this.index === 1) {
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.all.join('\n')));
+      element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(this.all.join('\n')));
     }else{
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.data.join('\n')));
+      element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(this.data.join('\n')));
     }
-    element.setAttribute('download', 'Pluviometros.txt');
+    element.setAttribute('download', `Pluviometros_${Date.now()}.csv`);
     element.style.display = 'none';
     document.body.appendChild(element);
     element.click();
