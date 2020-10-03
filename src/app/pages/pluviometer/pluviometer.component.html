@@ -17,7 +17,7 @@
       </mat-form-field>
       <input type="file" name="photo" (change)="setPhoto($event)">
     </mat-card-content>
-    <mat-card-actions align="start">
+    <mat-card-actions align="right">
       <button mat-button (click)="regist()">Registrar nuevo</button>
       <button mat-button (click)="show = true; getLocation();" color="secondary">Ver Registros</button>
     </mat-card-actions>
@@ -55,6 +55,7 @@
                 </td>
                 <td>
                   <a mat-button [routerLink]="['/measurements',location.name]" style="float: right;">Medir</a>
+                  <a mat-button [href]="location.url" style="float: right;" target="_blank">ver</a>
                   <button mat-button (click)="deleteLocation(location.name)" style="float: right;"><mat-icon class="mat-18">close</mat-icon></button>
                 </td>
               </tr>
@@ -90,7 +91,7 @@
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions align="right">
       <mat-chip-list>
           <mat-chip>Tu Latitud: {{latitude}}</mat-chip>
           <mat-chip> Tu Longitud : {{longitude}}</mat-chip>
