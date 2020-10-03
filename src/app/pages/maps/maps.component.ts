@@ -78,6 +78,9 @@ export class MapsComponent implements OnInit {
         }).bindPopup(`
           <div class="pop-up-map">
             <b><h2>${l.name}</h2></b>
+            <a href="${l.url}">
+              <img src="${l.url}" alt="Ubicacion" class="photo-location">
+            </a>
             <p>
               latitud: ${l.latitude}
               <br>
@@ -89,14 +92,17 @@ export class MapsComponent implements OnInit {
             <span><small><b>${l.user}</b></small></span>
           </div>
           <style>
-          table{
-            text-align:center
-          }
-          th:nth-child(odd), td:nth-child(odd){
+            table{
+              text-align:center
+            }
+            th:nth-child(odd), td:nth-child(odd){
               color:green;
             }
-          th:nth-child(even), td:nth-child(even){
+            th:nth-child(even), td:nth-child(even){
               color:red;
+            }
+            .photo-location{
+              width: 100%;
             }
           </style>
         `).openPopup();

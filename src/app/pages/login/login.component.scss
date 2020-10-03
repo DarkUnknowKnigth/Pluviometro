@@ -35,6 +35,9 @@ mat-card-actions{
   align-content: flex-end;
   justify-content: flex-end;
 }
+.qr{
+  width: 100%;
+}
 // en grnade
 @media screen and ( min-width: 700px ){
   .logo{
@@ -47,5 +50,9 @@ mat-card-actions{
     right: 10%;
     width: 90px;
     height: 70px;
+  }
+  .qr{
+    padding: 40%;
+    width: 200px;
   }
 }

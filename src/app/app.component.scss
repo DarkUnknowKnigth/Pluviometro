@@ -30,12 +30,12 @@ mat-item > a{
   background-image: url( '../assets/images/svbg.jpg');
 }
 .copyright{
-  text-align: center;
-  align-items: center;
+  text-align: left;
   position: absolute;
   margin: auto;
   width: 70%;
-  bottom: 10vh;
+  margin-bottom: 5rem;
+  bottom: 0vh;
 }
 
 @media only screen and (min-width: 700px){

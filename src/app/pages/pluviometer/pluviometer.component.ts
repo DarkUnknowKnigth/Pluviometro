@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { FormControl } from '@angular/forms';
 import { generate, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { UploadPhotoService } from '../../services/upload-photo.service';
 
 @Component({
   selector: 'app-pluviometer',
@@ -19,10 +20,11 @@ export class PluviometerComponent implements OnInit {
   index = 0;
   user: any;
   longitude: number;
+  photo = new FormData();
   show = false;
   data = ['Locacion, Hora, Medida'];
   all = ['Locacion, Hora, Medida'];
-  constructor(private db: AngularFireDatabase, private auth: AuthService) {
+  constructor(private db: AngularFireDatabase, private auth: AuthService, private uploadsv: UploadPhotoService) {
     this.itemRef = this.db.object('locations');
     this.locations = this.itemRef.valueChanges();
     this.getLocation();
@@ -61,13 +63,20 @@ export class PluviometerComponent implements OnInit {
     } else {
       const ref = 'locations/' + this.name.value;
       const itemRef = this.db.object(ref);
-      itemRef.set({
-        name: this.name.value,
-        latitude: this.latitude,
-        longitude: this.longitude,
-        uid: this.user.uid,
-        user: this.user.displayName,
-        measurements: []
+      const data = this.photo.get('photo');
+      this.uploadsv.upload( this.name.value , data ).then( resp => {
+        const refPhoto = this.uploadsv.refOfCloud( this.name.value );
+        refPhoto.getDownloadURL().subscribe( urlPhoto =>{
+          itemRef.set({
+            name: this.name.value,
+            latitude: this.latitude,
+            longitude: this.longitude,
+            uid: this.user.uid,
+            user: this.user.displayName,
+            url: urlPhoto,
+            measurements: []
+          });
+        });
       });
     }
   }
@@ -99,5 +108,13 @@ export class PluviometerComponent implements OnInit {
       this.latitude = 0;
       this.longitude = 0;
     }
+  }
+  setPhoto(ev: any): void{
+    if (ev.target.files.length > 0) {
+      this.photo.append('photo', ev.target.files[0], this.name.value );
+    }
+  }
+  uploadFile(): void {
+
   }
 }

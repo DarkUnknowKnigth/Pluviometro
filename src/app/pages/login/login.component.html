@@ -1,7 +1,6 @@
-<mat-card class="example-card">
+<mat-card *ngIf="!donating">
   <mat-card-header>
     <mat-card-title>Iniciar Sesión</mat-card-title>
-    <mat-card-subtitle>Ingresa el usuario y contraseña</mat-card-subtitle>
   </mat-card-header>
   <div class="image-container">
     <img class="logo" src="../../../assets/images/pluvify.png" alt="Logo">
@@ -16,6 +15,20 @@
     <button *ngIf="!isAuth" mat-button (click)="login()">Iniciar Sesión con Google<mat-icon class="mat-18">login</mat-icon></button>
     <a *ngIf="isAuth" mat-button [routerLink]="['/pluviometer']" routerLinkActive="router-link-active" >Pluviometros<mat-icon class="mat-18">add</mat-icon></a>
     <a mat-button href="https://github.com/DarkUnknowKnigth/Pluviometro">Github<mat-icon class="mat-18">favorite</mat-icon></a>
+    <button mat-button (click)="donating = true">Donar<mat-icon class="mat-18">monetization_on</mat-icon></button>
   </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="donating" style="width: 60vw;">
+    <mat-card-header>
+        <mat-card-title>Dona para mantener el App</mat-card-title>
+        <mat-card-subtitle>Dev-Web Tuxtla</mat-card-subtitle>
+    </mat-card-header>
+    <img class="qr" matCardImage src="../../../assets/images/QR.png" alt="QR de donacion">
+    <mat-card-content>
+      <h1>Escanea el QR</h1>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-button color="warn" (click)="donating = false">Cerrar</button>
+    </mat-card-actions>
 </mat-card>
 

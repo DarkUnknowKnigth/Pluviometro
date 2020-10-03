@@ -1,3 +1,4 @@
+<!-- capturar pluviometros -->
 <mat-card *ngIf="!show">
     <mat-card-header>
         <mat-card-title>Registrar Pluviometro</mat-card-title>
@@ -14,12 +15,14 @@
       <mat-form-field>
         <input matInput placeholder="Location" disabled [value]="longitude">
       </mat-form-field>
+      <input type="file" name="photo" (change)="setPhoto($event)">
     </mat-card-content>
     <mat-card-actions align="start">
       <button mat-button (click)="regist()">Registrar nuevo</button>
       <button mat-button (click)="show = true; getLocation();" color="secondary">Ver Registros</button>
     </mat-card-actions>
 </mat-card>
+<!-- listar pluviometros -->
 <mat-card *ngIf="show">
     <mat-card-header>
       <mat-card-title>Pluviometros</mat-card-title>

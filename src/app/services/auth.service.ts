@@ -1,8 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   public authUser = this.userSource.asObservable();
   private isAuthSource = new BehaviorSubject<boolean>( false );
   public isAuth = this.isAuthSource.asObservable();
-  constructor(private afauth: AngularFireAuth, private router: Router) {
+  constructor(private afauth: AngularFireAuth, private router: Router, private http: HttpClient) {
     this.afauth.authState.subscribe( user => {
       if ( !user ) {
         return;
@@ -45,5 +46,8 @@ export class AuthService {
     this.setAuthUser(null);
     this.setAuthUserStatus(false);
     this.router.navigateByUrl('login');
+  }
+  donate(data: any): Observable<any> {
+    return this.http.post('https://www.paypal.com/cgi-bin/webscr', data);
   }
 }

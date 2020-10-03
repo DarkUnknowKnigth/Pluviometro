@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   isAuth = false;
+  donating = false;
   constructor(private auth: AuthService, private router: Router) {
     this.auth.isAuth.subscribe( a => this.isAuth = a);
     this.auth.authUser.subscribe(user => {
